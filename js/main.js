@@ -8,10 +8,12 @@ document.getElementById("next").onclick = function() {
 };
 // Carousel auto
 var slide = 0; // Variable
-//var time = setInterval(carousel, 5000); // Défile les images toutes les 5 secondes // Scroll images every 5 seconds
+var time=0; // Défile les images toutes les 5 secondes // Scroll images every 5 seconds
 
 function carousel() {
+  // clearTimeout(time);
 
+  time = setTimeout(carousel, 3000);
   // Range les images/slides dans un tableau // Store images/slides in a table
   var table = Array.from(document.getElementsByClassName('slide'));
 
@@ -32,38 +34,43 @@ carousel();
 
 // Fonction du bouton droit avec les détails // Right button function with details
 
-// function next(next) {
-//   var table = Array.from(document.getElementsByClassName('slide'));
-//
-//   for (i = 0; i < table.length; i++) {
-//     table[i].style.display = "none";
-//   }
-//   slide++;
-//   if (slide > table.length) {
-//     slide = 1;
-//   }
-//   table[slide - 1].style.display = "block";
-// }
+function next(next) {
+  clearTimeout(time);
+  var table = Array.from(document.getElementsByClassName('slide'));
+
+    for (i = 0; i < table.length; i++) {
+      table[i].style.display = "none";
+    }
+    slide++;
+    if (slide > table.length) {
+      slide = 1;
+    }
+    table[slide - 1].style.display = "block";
+    time = setTimeout(carousel,3000);
+  }
+
+  function previous(previous) {
+    clearTimeout(time);
+    var table = Array.from(document.getElementsByClassName('slide'));
+
+    for (i = 0; i < table.length; i++) {
+      table[i].style.display = "none";
+    }
+    slide--;
+    if (slide -1 < 0) {
+      slide = 4;
+    }
+    table[slide - 1].style.display = "block";
+    time = setTimeout(carousel,3000);
+  }
+
 
 // Fonction simplifiée // Simplified function
-function next(next) {
-  carousel();
-}
-
-// function previous(previous) {
-//   var table = Array.from(document.getElementsByClassName('slide'));
-//
-//   for (i = 0; i < table.length; i++) {
-//     table[i].style.display = "none";
-//   }
-//   slide--;
-//   if (slide > table.length) {
-//     slide = 1;
-//   }
-//   table[slide - 1].style.display = "block";
+// function next(next) {
+//   carousel();
 // }
 
-function previous(previous) {
-  carousel();
-  slide = -1;
-}
+// function previous(previous) {
+//   carousel();
+//   slide--;
+// }
